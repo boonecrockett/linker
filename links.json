@@ -1,13 +1,12 @@
 [
   {
-    "url": "https://example.com/link1",
+    "url":       "https://example.com/link1",
     "thumbnail": "https://via.placeholder.com/600",
-    "alt": "Link 1"
+    "alt":       "Link 1"
   },
   {
-    "url": "https://example.com/link2",
+    "url":       "https://example.com/link2",
     "thumbnail": "https://via.placeholder.com/600",
-    "alt": "Link 2"
+    "alt":       "Link 2"
   }
-  // …more items…
 ]
