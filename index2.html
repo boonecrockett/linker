@@ -6,226 +6,422 @@
     name="viewport"
     content="width=device-width, initial-scale=1"
   />
-  <title>My Links — Boone &amp; Crockett Style</title>
+  <title>My Links (Instagram Style)</title>
 
-  <!-- ===================================================================
-       Fonts & Colors (matching B&C site)
-       ==================================================================== -->
+  <!-- ─── 1. Import a simple icon font for action icons ────────────────── -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pkHyQ2J+2N8QnuiFwPgeyu9Sl83mX0StaB7eKBQnUi0fdeXD11ysI2glyu6sXFCYKq0TzlMz1M04CFwZx4c8Qg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- ─── 2. CSS to mimic Instagram’s desktop layout ───────────────────── -->
   <style>
-    /* ─── 1. Color Palette ─────────────────────────────────────────────── */
-    :root {
-      --color-dark-green: #004d38;     /* header/nav accent */
-      --color-medium-green: #00664d;   /* button hover accent */
-      --color-light-gray: #f5f5f5;     /* page background */
-      --color-card-bg: #ffffff;        /* card background */
-      --color-border: #e0e0e0;         /* card border */
-      --color-text: #333333;           /* primary text */
-      --color-muted: #555555;          /* secondary text */
-    }
-
-    /* ─── 2. Base Reset & Typography ──────────────────────────────────── */
-    *, *::before, *::after {
+    /* 1) Reset & Base */
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    html {
-      font-size: 100%; /* 16px baseline */
-    }
     body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background-color: var(--color-light-gray);
-      color: var(--color-text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    h1, h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--color-dark-green);
-      line-height: 1.2;
-    }
-    h1 {
-      font-size: 2rem; /* 32px */
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.25rem; /* 20px */
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1rem; /* 16px */
-      color: var(--color-muted);
-      margin-bottom: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      background-color: #fafafa;
+      color: #262626;
+      line-height: 1.4;
     }
     a {
-      color: var(--color-dark-green);
+      color: inherit;
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
-    }
 
-    /* ─── 3. Page Wrapper & Layout ───────────────────────────────────── */
-    .wrapper {
-      max-width: 800px;  /* matches B&C content column */
+    /* 2) Center Column Wrapper */
+    .container {
+      max-width: 600px;
       margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-    header.page-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    header.page-header h1 {
-      margin-bottom: 0.25rem;
-    }
-    header.page-header p {
-      font-size: 1rem;
-      color: var(--color-muted);
     }
 
-    /* ─── 4. Link Cards (mimic B&C post cards) ────────────────────────── */
-    ul.link-list {
-      list-style: none;
-      margin-top: 1.5rem;
-    }
-    ul.link-list li {
-      background-color: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      margin-bottom: 1.5rem;
-      overflow: hidden;
-      transition: box-shadow 0.2s ease-in-out;
-    }
-    ul.link-list li:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    /* ─── 5. Card Content ──────────────────────────────────────────────── */
-    .link-card {
+    /* 3) Top Nav Bar */
+    .insta-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #fff;
+      border-bottom: 1px solid #dbdbdb;
       display: flex;
-      flex-direction: column;
-      padding: 1rem 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
     }
-    .link-card h2 {
-      margin-bottom: 0.5rem;
+    .insta-nav .logo {
+      font-family: "Grand Hotel", cursive;
+      font-size: 2rem;
+      color: #262626;
     }
-    .link-card p {
-      margin-bottom: 0.75rem;
+    .insta-nav .search-input {
+      flex: 1;
+      margin: 0 20px;
     }
-    .link-card a.button {
-      align-self: flex-start;
-      background-color: var(--color-dark-green);
-      color: #ffffff;
-      padding: 0.5rem 1rem;
-      font-size: 0.95rem;
+    .insta-nav input[type="text"] {
+      width: 100%;
+      max-width: 215px;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: 1px solid #dbdbdb;
       border-radius: 3px;
-      transition: background-color 0.2s ease;
+      background-color: #efefef;
     }
-    .link-card a.button:hover {
-      background-color: var(--color-medium-green);
+    .insta-nav .icons {
+      display: flex;
+      gap: 20px;
+      font-size: 1.2rem;
+      color: #262626;
     }
 
-    /* ─── 6. Footer ───────────────────────────────────────────────────── */
-    footer {
-      margin-top: 3rem;
+    /* 4) Push content below fixed nav */
+    .spacer {
+      height: 60px;
+    }
+
+    /* 5) Stories Row */
+    .stories {
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+    }
+    .story {
+      flex: 0 0 auto;
       text-align: center;
-      font-size: 0.875rem; /* 14px */
-      color: var(--color-muted);
+      width: 60px;
+    }
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff8501; /* “story” gradient mimic */
+      object-fit: cover;
+    }
+    .story span {
+      display: block;
+      margin-top: 5px;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* 6) Feed Posts */
+    .post {
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    /* 6.1 Post Header (profile pic + username + menu) */
+    .post-header {
+      display: flex;
+      align-items: center;
+      padding: 14px;
+    }
+    .post-header img.profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 12px;
+      object-fit: cover;
+    }
+    .post-header .username {
+      font-weight: bold;
+      font-size: 14px;
+      flex: 1;
+    }
+    .post-header .menu-icon {
+      font-size: 1rem;
+      color: #262626;
+    }
+
+    /* 6.2 Post Image (use link thumbnail or placeholder) */
+    .post-image {
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%; /* 1:1 ratio */
+      background-color: #efefef;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* 6.3 Post Actions (like, comment, share, save) */
+    .post-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      font-size: 1.2rem;
+    }
+    .post-actions .left-icons,
+    .post-actions .right-icons {
+      display: flex;
+      gap: 16px;
+    }
+    .post-actions i {
+      cursor: pointer;
+    }
+
+    /* 6.4 Post Caption */
+    .post-caption {
+      padding: 0 14px 12px;
+      font-size: 14px;
+    }
+    .post-caption .username {
+      font-weight: bold;
+      margin-right: 6px;
+    }
+    .post-caption p {
+      display: inline;
+    }
+
+    /* 6.5 Divider */
+    .divider {
+      height: 1px;
+      background-color: #efefef;
+      margin-top: 10px;
+    }
+
+    /* 7) Footer Spacer */
+    .footer-spacer {
+      height: 50px;
     }
   </style>
+
+  <!--  ─── 3. (Optional) Import a cursive font for the “Instagram” logo ─── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap"
+    rel="stylesheet"
+  />
 </head>
+
 <body>
+  <!-- ─── 4. Top Nav Bar ────────────────────────────────────────────────── -->
+  <nav class="insta-nav">
+    <div class="logo">Instagram</div>
 
-  <!-- ─── 7. Page Content ──────────────────────────────────────────────── -->
-  <div class="wrapper">
-    <!-- Page Header -->
-    <header class="page-header">
-      <h1>My Links</h1>
-      <p>A curated list of my favorite resources</p>
-    </header>
+    <div class="search-input">
+      <input type="text" placeholder="Search" />
+    </div>
 
-    <!-- Link List (hardcoded for demonstration; see JS below for JSON‐driven) -->
-    <ul class="link-list">
-      <li>
-        <div class="link-card">
-          <h2>Website</h2>
-          <p>Visit my personal site for blog posts, projects, and contact info.</p>
-          <a
-            href="https://mark.example.com"
-            class="button"
+    <div class="icons">
+      <i class="fa-regular fa-house"></i>
+      <i class="fa-regular fa-paper-plane"></i>
+      <i class="fa-regular fa-square-plus"></i>
+      <i class="fa-regular fa-compass"></i>
+      <i class="fa-regular fa-heart"></i>
+      <i class="fa-regular fa-user"></i>
+    </div>
+  </nav>
+
+  <!-- Pushes content down so nav doesn’t overlap -->
+  <div class="spacer"></div>
+
+  <div class="container">
+    <!-- ─── 5. Stories Row (static placeholders) ─────────────────────────── -->
+    <div class="stories">
+      <div class="story">
+        <img
+          src="https://via.placeholder.com/60"
+          alt="story avatar"
+        />
+        <span>Your Story</span>
+      </div>
+      <div class="story">
+        <img
+          src="https://via.placeholder.com/60"
+          alt="story avatar"
+        />
+        <span>Link 1</span>
+      </div>
+      <div class="story">
+        <img
+          src="https://via.placeholder.com/60"
+          alt="story avatar"
+        />
+        <span>Link 2</span>
+      </div>
+      <div class="story">
+        <img
+          src="https://via.placeholder.com/60"
+          alt="story avatar"
+        />
+        <span>Link 3</span>
+      </div>
+      <div class="story">
+        <img
+          src="https://via.placeholder.com/60"
+          alt="story avatar"
+        />
+        <span>Link 4</span>
+      </div>
+      <!-- …add more story placeholders as needed… -->
+    </div>
+
+    <!-- ─── 6. Feed of “Posts” (each post = one link) ─────────────────────── -->
+    <!-- EXAMPLE POST #1 (hard-coded) -->
+    <div class="post">
+      <!-- 6.1 Header: Profile Pic + Username -->
+      <div class="post-header">
+        <img
+          class="profile-pic"
+          src="https://via.placeholder.com/32"
+          alt="Profile Picture"
+        />
+        <div class="username">my_website</div>
+        <i class="fa-ellipsis-h menu-icon"></i>
+      </div>
+
+      <!-- 6.2 Square Image Area: could be a thumbnail or solid background -->
+      <div
+        class="post-image"
+        style="background-image: url('https://via.placeholder.com/600')"
+      ></div>
+
+      <!-- 6.3 Actions Bar -->
+      <div class="post-actions">
+        <div class="left-icons">
+          <i class="fa-regular fa-heart"></i>
+          <i class="fa-regular fa-comment"></i>
+          <i class="fa-regular fa-paper-plane"></i>
+        </div>
+        <div class="right-icons">
+          <i class="fa-regular fa-bookmark"></i>
+        </div>
+      </div>
+
+      <!-- 6.4 Caption: Use link title and description -->
+      <div class="post-caption">
+        <span class="username">my_website</span>
+        <span>Visit my personal site for blog posts, projects, and contact info. 
+          <a href="https://mark.example.com" style="color: #00376b;"
             target="_blank"
             rel="noopener"
-            >Go to Website</a
+            >mark.example.com</a
           >
-        </div>
-      </li>
+        </span>
+      </div>
 
-      <li>
-        <div class="link-card">
-          <h2>Newsletter</h2>
-          <p>Subscribe to my monthly newsletter about hunting, conservation, and tech.</p>
-          <a
-            href="https://newsletter.example.com"
-            class="button"
+      <div class="divider"></div>
+    </div>
+
+    <!-- EXAMPLE POST #2 -->
+    <div class="post">
+      <div class="post-header">
+        <img
+          class="profile-pic"
+          src="https://via.placeholder.com/32"
+          alt="Profile Picture"
+        />
+        <div class="username">newsletter</div>
+        <i class="fa-ellipsis-h menu-icon"></i>
+      </div>
+
+      <div
+        class="post-image"
+        style="background-image: url('https://via.placeholder.com/600')"
+      ></div>
+
+      <div class="post-actions">
+        <div class="left-icons">
+          <i class="fa-regular fa-heart"></i>
+          <i class="fa-regular fa-comment"></i>
+          <i class="fa-regular fa-paper-plane"></i>
+        </div>
+        <div class="right-icons">
+          <i class="fa-regular fa-bookmark"></i>
+        </div>
+      </div>
+
+      <div class="post-caption">
+        <span class="username">newsletter</span>
+        <span>Subscribe to my monthly newsletter about hunting, conservation, and tech. 
+          <a href="https://newsletter.example.com" style="color: #00376b;"
             target="_blank"
             rel="noopener"
-            >Read Newsletter</a
+            >newsletter.example.com</a
           >
-        </div>
-      </li>
+        </span>
+      </div>
 
-      <li>
-        <div class="link-card">
-          <h2>Blog</h2>
-          <p>Latest thoughts on Montana travel, SEO, and AI workflows.</p>
-          <a
-            href="https://blog.example.com"
-            class="button"
-            target="_blank"
-            rel="noopener"
-            >Visit Blog</a
-          >
-        </div>
-      </li>
+      <div class="divider"></div>
+    </div>
 
-      <!-- …n8n can loop through /links.json and inject similar <li> cards here… -->
-    </ul>
+    <!-- Add more .post blocks for each link… or use JS to inject dynamically 🔽 -->
 
-    <!-- JS to drive cards from /links.json (uncomment if you wish) -->
+    <!-- ─── (Optional) JSON-Driven JS: Replace hard-coded .post blocks ───── -->
     <!--
     <script>
-      async function renderLinks() {
-        try {
-          const res = await fetch('/links.json');
-          if (!res.ok) throw new Error('Failed to fetch links.json');
-          const data = await res.json();
-          const list = document.querySelector('.link-list');
-          list.innerHTML = ''; // clear hardcoded examples
-          data.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-              <div class="link-card">
-                <h2>${item.title}</h2>
-                <p>${item.description || ''}</p>
-                <a href="${item.url}" class="button" target="_blank" rel="noopener">
-                  ${item.buttonText || 'Visit'}
-                </a>
+      async function renderLinksAsPosts() {
+        const res = await fetch('/links.json');
+        const data = await res.json();
+        const container = document.querySelector('.container');
+
+        // Remove hard-coded story + posts if needed
+        document.querySelector('.stories').remove();
+
+        data.forEach(item => {
+          const post = document.createElement('div');
+          post.className = 'post';
+          post.innerHTML = `
+            <div class="post-header">
+              <img
+                class="profile-pic"
+                src="${item.avatar || 'https://via.placeholder.com/32'}"
+                alt="Profile"
+              />
+              <div class="username">${item.username || item.title.toLowerCase().replace(/\s+/g, '_')}</div>
+              <i class="fa-ellipsis-h menu-icon"></i>
+            </div>
+            <div
+              class="post-image"
+              style="background-image: url('${item.thumbnail || 'https://via.placeholder.com/600'}')"
+            ></div>
+            <div class="post-actions">
+              <div class="left-icons">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-paper-plane"></i>
               </div>
-            `;
-            list.appendChild(li);
-          });
-        } catch (err) {
-          console.error(err);
-        }
+              <div class="right-icons">
+                <i class="fa-regular fa-bookmark"></i>
+              </div>
+            </div>
+            <div class="post-caption">
+              <span class="username">${item.username || item.title}</span>
+              <span>${item.description || ''} 
+                <a href="${item.url}" style="color: #00376b;" target="_blank" rel="noopener">
+                  ${item.url}
+                </a>
+              </span>
+            </div>
+            <div class="divider"></div>
+          `;
+          container.appendChild(post);
+        });
       }
-      window.addEventListener('DOMContentLoaded', renderLinks);
+      window.addEventListener('DOMContentLoaded', renderLinksAsPosts);
     </script>
     -->
-  </div>
 
-  <!-- Footer Attribution (optional) -->
-  <footer>
-    &copy; 2025 My Name — In Boone &amp; Crockett Style
-  </footer>
+    <!-- Extra space at bottom so last post isn’t flush against the viewport -->
+    <div class="footer-spacer"></div>
+  </div>
 </body>
 </html>
