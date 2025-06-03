@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Links</title>
+  <!-- Link to external stylesheet (optional) -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>My Links</h1>
+  </header>
+
+  <main>
+    <!-- Container where link buttons will be injected -->
+    <div id="link-container"><a href=http://www.boone-crockett.org/node/449751">Wildlife Caught on Camera—Volume 13</a></div>
+  </main>
+
+  <footer>
+    <!-- Optional footer content -->
+    <p>&copy; 2025 Boone and Crockett Club</p>
+  </footer>
+
+  <script>
+    async function renderLinks() {
+      try {
+        const response = await fetch('/links.json');
+        if (!response.ok) throw new Error('Could not load links.json');
+        const links = await response.json();
+        const container = document.getElementById('link-container');
+
+        links.forEach(link => {
+          const anchor = document.createElement('a');
+          anchor.href = link.url;
+          anchor.textContent = link.title;
+          anchor.className = 'link-button';
+          container.appendChild(anchor);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Render link buttons on page load
+    window.addEventListener('DOMContentLoaded', renderLinks);
+  </script>
+</body>
+</html>
