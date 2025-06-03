@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>My Links</title>
+
+  <!-- ===================================================================
+       CSS to approximate Boone & Crockett’s tag page typography, spacing,
+       and card‐style look (see: turn0search0, turn1search0)
+       ==================================================================== -->
+  <style>
+    /* 1. Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: #00563d; /* dark green accent */
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 2. Wrapper & container */
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* 3. Page header */
+    header.page-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    header.page-header h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      color: #002e20; /* very dark green/black */
+      margin-bottom: 0.5rem;
+    }
+    header.page-header p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* 4. Link list (cards) */
+    ul.link-list {
+      list-style: none;
+    }
+    ul.link-list li {
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+    ul.link-list li:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* 5. Card content */
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1rem;
+    }
+    .link-card h2 {
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      color: #002e20;
+      margin-bottom: 0.5rem;
+    }
+    .link-card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 0.75rem;
+    }
+    .link-card a.button {
+      align-self: flex-start;
+      background-color: #00563d;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+    }
+    .link-card a.button:hover {
+      background-color: #004a33;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- 1. Page header (mimics “B&C Instagram Posts” heading style) -->
+    <header class="page-header">
+      <h1>My Links</h1>
+      <p>A curated list of my favorite resources</p>
+    </header>
+
+    <!-- 2. Replace this UL with n8n‐driven JSON → JS template logic -->
+    <ul class="link-list">
+      <!-- Example card #1 -->
+      <li>
+        <div class="link-card">
+          <h2>Website</h2>
+          <p>Visit my personal site for blog posts, projects, and contact info.</p>
+          <a
+            href="https://mark.example.com"
+            class="button"
+            target="_blank"
+            rel="noopener"
+            >Go to Website</a
+          >
+        </div>
+      </li>
+
+      <!-- Example card #2 -->
+      <li>
+        <div class="link-card">
+          <h2>Newsletter</h2>
+          <p>Subscribe to my monthly newsletter about hunting, conservation, and tech.</p>
+          <a
+            href="https://newsletter.example.com"
+            class="button"
+            target="_blank"
+            rel="noopener"
+            >Read Newsletter</a
+          >
+        </div>
+      </li>
+
+      <!-- Example card #3 -->
+      <li>
+        <div class="link-card">
+          <h2>Blog</h2>
+          <p>Latest thoughts on Montana travel, SEO, and AI workflows.</p>
+          <a
+            href="https://blog.example.com"
+            class="button"
+            target="_blank"
+            rel="noopener"
+            >Visit Blog</a
+          >
+        </div>
+      </li>
+
+      <!-- …n8n can loop through /links.json and inject similar <li>… cards …</li>… -->
+    </ul>
+  </div>
+
+  <!-- 3. If you want to drive this from /links.json, you could swap out
+        the hard‐coded <li> elements above with JS like:
+
+    <script>
+      async function renderLinks() {
+        const res = await fetch("/links.json");
+        const data = await res.json();
+        const list = document.querySelector(".link-list");
+        data.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <div class="link-card">
+              <h2>${item.title}</h2>
+              <p>${item.description || ""}</p>
+              <a href="${item.url}" class="button" target="_blank" rel="noopener">
+                Visit
+              </a>
+            </div>
+          `;
+          list.appendChild(li);
+        });
+      }
+      window.addEventListener("DOMContentLoaded", renderLinks);
+    </script>
+  -->
+
+</body>
+</html>
