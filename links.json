@@ -1,12 +1,5 @@
-[
-  {
-    "url":       "https://example.com/link1",
-    "thumbnail": "https://via.placeholder.com/600",
-    "alt":       "Link 1"
-  },
-  {
-    "url":       "https://example.com/link2",
-    "thumbnail": "https://via.placeholder.com/600",
-    "alt":       "Link 2"
-  }
-]
+{
+  "url": "http://www.boone-crockett.org/node/476811",
+  "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/elk_caught_on_camera.png",
+  "alt": "Wildlife Caught on Camera—Volume 14"
+}
