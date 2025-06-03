@@ -6,422 +6,135 @@
     name="viewport"
     content="width=device-width, initial-scale=1"
   />
-  <title>My Links (Instagram Style)</title>
-
-  <!-- ─── 1. Import a simple icon font for action icons ────────────────── -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pkHyQ2J+2N8QnuiFwPgeyu9Sl83mX0StaB7eKBQnUi0fdeXD11ysI2glyu6sXFCYKq0TzlMz1M04CFwZx4c8Qg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
-  <!-- ─── 2. CSS to mimic Instagram’s desktop layout ───────────────────── -->
+  <title>Instagram-Style Grid Links</title>
   <style>
-    /* 1) Reset & Base */
+    /* ─── 1. Basic Reset & Body ───────────────────────────────────────── */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     body {
+      background-color: #fafafa;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif;
-      background-color: #fafafa;
       color: #262626;
       line-height: 1.4;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
+      padding: 1rem;
     }
 
-    /* 2) Center Column Wrapper */
-    .container {
+    /* ─── 2. Grid Container ───────────────────────────────────────────── */
+    .grid-container {
+      display: grid;
+      /* Instagram uses 3 columns on desktop */
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px; /* very thin gutters like Instagram */
       max-width: 600px;
       margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
     }
 
-    /* 3) Top Nav Bar */
-    .insta-nav {
-      position: fixed;
+    /* ─── 3. Each Grid Item ───────────────────────────────────────────── */
+    .grid-item {
+      position: relative;
+      width: 100%;
+      /* Maintain 1:1 aspect ratio */
+      padding-top: 100%;
+      overflow: hidden;
+      background-color: #efefef; /* placeholder background */
+    }
+
+    .grid-item img {
+      position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 60px;
-      background-color: #fff;
-      border-bottom: 1px solid #dbdbdb;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      z-index: 100;
-    }
-    .insta-nav .logo {
-      font-family: "Grand Hotel", cursive;
-      font-size: 2rem;
-      color: #262626;
-    }
-    .insta-nav .search-input {
-      flex: 1;
-      margin: 0 20px;
-    }
-    .insta-nav input[type="text"] {
       width: 100%;
-      max-width: 215px;
-      padding: 5px 10px;
-      font-size: 14px;
-      border: 1px solid #dbdbdb;
-      border-radius: 3px;
-      background-color: #efefef;
-    }
-    .insta-nav .icons {
-      display: flex;
-      gap: 20px;
-      font-size: 1.2rem;
-      color: #262626;
-    }
-
-    /* 4) Push content below fixed nav */
-    .spacer {
-      height: 60px;
-    }
-
-    /* 5) Stories Row */
-    .stories {
-      background-color: #fff;
-      border: 1px solid #dbdbdb;
-      border-radius: 3px;
-      padding: 10px 0;
-      margin-bottom: 20px;
-      display: flex;
-      gap: 15px;
-      overflow-x: auto;
-    }
-    .story {
-      flex: 0 0 auto;
-      text-align: center;
-      width: 60px;
-    }
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff8501; /* “story” gradient mimic */
+      height: 100%;
       object-fit: cover;
     }
-    .story span {
+
+    /* ─── 4. Link Overlay ──────────────────────────────────────────────── */
+    .grid-item a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: block;
-      margin-top: 5px;
-      font-size: 12px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      text-decoration: none;
+      /* Transparent overlay for clickability */
     }
 
-    /* 6) Feed Posts */
-    .post {
-      background-color: #fff;
-      border: 1px solid #dbdbdb;
-      border-radius: 3px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    /* 6.1 Post Header (profile pic + username + menu) */
-    .post-header {
-      display: flex;
-      align-items: center;
-      padding: 14px;
-    }
-    .post-header img.profile-pic {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      margin-right: 12px;
-      object-fit: cover;
-    }
-    .post-header .username {
-      font-weight: bold;
-      font-size: 14px;
-      flex: 1;
-    }
-    .post-header .menu-icon {
+    /* ─── 5. Optional Caption Under Grid ───────────────────────────────── */
+    .grid-caption {
+      text-align: center;
+      margin-top: 1rem;
       font-size: 1rem;
-      color: #262626;
     }
 
-    /* 6.2 Post Image (use link thumbnail or placeholder) */
-    .post-image {
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%; /* 1:1 ratio */
-      background-color: #efefef;
-      background-size: cover;
-      background-position: center;
+    /* ─── 6. Responsive Breakpoints ────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-
-    /* 6.3 Post Actions (like, comment, share, save) */
-    .post-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 14px;
-      font-size: 1.2rem;
-    }
-    .post-actions .left-icons,
-    .post-actions .right-icons {
-      display: flex;
-      gap: 16px;
-    }
-    .post-actions i {
-      cursor: pointer;
-    }
-
-    /* 6.4 Post Caption */
-    .post-caption {
-      padding: 0 14px 12px;
-      font-size: 14px;
-    }
-    .post-caption .username {
-      font-weight: bold;
-      margin-right: 6px;
-    }
-    .post-caption p {
-      display: inline;
-    }
-
-    /* 6.5 Divider */
-    .divider {
-      height: 1px;
-      background-color: #efefef;
-      margin-top: 10px;
-    }
-
-    /* 7) Footer Spacer */
-    .footer-spacer {
-      height: 50px;
+    @media (max-width: 400px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-
-  <!--  ─── 3. (Optional) Import a cursive font for the “Instagram” logo ─── -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap"
-    rel="stylesheet"
-  />
 </head>
-
 <body>
-  <!-- ─── 4. Top Nav Bar ────────────────────────────────────────────────── -->
-  <nav class="insta-nav">
-    <div class="logo">Instagram</div>
 
-    <div class="search-input">
-      <input type="text" placeholder="Search" />
+  <div class="grid-container">
+    <!-- ── Example Item 1 ─────────────────────────────────────────────── -->
+    <div class="grid-item">
+      <a href="https://example.com/link1" target="_blank" rel="noopener">
+        <img src="https://via.placeholder.com/600" alt="Link 1" />
+      </a>
     </div>
 
-    <div class="icons">
-      <i class="fa-regular fa-house"></i>
-      <i class="fa-regular fa-paper-plane"></i>
-      <i class="fa-regular fa-square-plus"></i>
-      <i class="fa-regular fa-compass"></i>
-      <i class="fa-regular fa-heart"></i>
-      <i class="fa-regular fa-user"></i>
-    </div>
-  </nav>
-
-  <!-- Pushes content down so nav doesn’t overlap -->
-  <div class="spacer"></div>
-
-  <div class="container">
-    <!-- ─── 5. Stories Row (static placeholders) ─────────────────────────── -->
-    <div class="stories">
-      <div class="story">
-        <img
-          src="https://via.placeholder.com/60"
-          alt="story avatar"
-        />
-        <span>Your Story</span>
-      </div>
-      <div class="story">
-        <img
-          src="https://via.placeholder.com/60"
-          alt="story avatar"
-        />
-        <span>Link 1</span>
-      </div>
-      <div class="story">
-        <img
-          src="https://via.placeholder.com/60"
-          alt="story avatar"
-        />
-        <span>Link 2</span>
-      </div>
-      <div class="story">
-        <img
-          src="https://via.placeholder.com/60"
-          alt="story avatar"
-        />
-        <span>Link 3</span>
-      </div>
-      <div class="story">
-        <img
-          src="https://via.placeholder.com/60"
-          alt="story avatar"
-        />
-        <span>Link 4</span>
-      </div>
-      <!-- …add more story placeholders as needed… -->
+    <!-- ── Example Item 2 ─────────────────────────────────────────────── -->
+    <div class="grid-item">
+      <a href="https://example.com/link2" target="_blank" rel="noopener">
+        <img src="https://via.placeholder.com/600" alt="Link 2" />
+      </a>
     </div>
 
-    <!-- ─── 6. Feed of “Posts” (each post = one link) ─────────────────────── -->
-    <!-- EXAMPLE POST #1 (hard-coded) -->
-    <div class="post">
-      <!-- 6.1 Header: Profile Pic + Username -->
-      <div class="post-header">
-        <img
-          class="profile-pic"
-          src="https://via.placeholder.com/32"
-          alt="Profile Picture"
-        />
-        <div class="username">my_website</div>
-        <i class="fa-ellipsis-h menu-icon"></i>
-      </div>
-
-      <!-- 6.2 Square Image Area: could be a thumbnail or solid background -->
-      <div
-        class="post-image"
-        style="background-image: url('https://via.placeholder.com/600')"
-      ></div>
-
-      <!-- 6.3 Actions Bar -->
-      <div class="post-actions">
-        <div class="left-icons">
-          <i class="fa-regular fa-heart"></i>
-          <i class="fa-regular fa-comment"></i>
-          <i class="fa-regular fa-paper-plane"></i>
-        </div>
-        <div class="right-icons">
-          <i class="fa-regular fa-bookmark"></i>
-        </div>
-      </div>
-
-      <!-- 6.4 Caption: Use link title and description -->
-      <div class="post-caption">
-        <span class="username">my_website</span>
-        <span>Visit my personal site for blog posts, projects, and contact info. 
-          <a href="https://mark.example.com" style="color: #00376b;"
-            target="_blank"
-            rel="noopener"
-            >mark.example.com</a
-          >
-        </span>
-      </div>
-
-      <div class="divider"></div>
+    <!-- ── Example Item 3 ─────────────────────────────────────────────── -->
+    <div class="grid-item">
+      <a href="https://example.com/link3" target="_blank" rel="noopener">
+        <img src="https://via.placeholder.com/600" alt="Link 3" />
+      </a>
     </div>
 
-    <!-- EXAMPLE POST #2 -->
-    <div class="post">
-      <div class="post-header">
-        <img
-          class="profile-pic"
-          src="https://via.placeholder.com/32"
-          alt="Profile Picture"
-        />
-        <div class="username">newsletter</div>
-        <i class="fa-ellipsis-h menu-icon"></i>
-      </div>
-
-      <div
-        class="post-image"
-        style="background-image: url('https://via.placeholder.com/600')"
-      ></div>
-
-      <div class="post-actions">
-        <div class="left-icons">
-          <i class="fa-regular fa-heart"></i>
-          <i class="fa-regular fa-comment"></i>
-          <i class="fa-regular fa-paper-plane"></i>
-        </div>
-        <div class="right-icons">
-          <i class="fa-regular fa-bookmark"></i>
-        </div>
-      </div>
-
-      <div class="post-caption">
-        <span class="username">newsletter</span>
-        <span>Subscribe to my monthly newsletter about hunting, conservation, and tech. 
-          <a href="https://newsletter.example.com" style="color: #00376b;"
-            target="_blank"
-            rel="noopener"
-            >newsletter.example.com</a
-          >
-        </span>
-      </div>
-
-      <div class="divider"></div>
+    <!-- ── Example Item 4 ─────────────────────────────────────────────── -->
+    <div class="grid-item">
+      <a href="https://example.com/link4" target="_blank" rel="noopener">
+        <img src="https://via.placeholder.com/600" alt="Link 4" />
+      </a>
     </div>
 
-    <!-- Add more .post blocks for each link… or use JS to inject dynamically 🔽 -->
+    <!-- ── Example Item 5 ─────────────────────────────────────────────── -->
+    <div class="grid-item">
+      <a href="https://example.com/link5" target="_blank" rel="noopener">
+        <img src="https://via.placeholder.com/600" alt="Link 5" />
+      </a>
+    </div>
 
-    <!-- ─── (Optional) JSON-Driven JS: Replace hard-coded .post blocks ───── -->
-    <!--
-    <script>
-      async function renderLinksAsPosts() {
-        const res = await fetch('/links.json');
-        const data = await res.json();
-        const container = document.querySelector('.container');
-
-        // Remove hard-coded story + posts if needed
-        document.querySelector('.stories').remove();
-
-        data.forEach(item => {
-          const post = document.createElement('div');
-          post.className = 'post';
-          post.innerHTML = `
-            <div class="post-header">
-              <img
-                class="profile-pic"
-                src="${item.avatar || 'https://via.placeholder.com/32'}"
-                alt="Profile"
-              />
-              <div class="username">${item.username || item.title.toLowerCase().replace(/\s+/g, '_')}</div>
-              <i class="fa-ellipsis-h menu-icon"></i>
-            </div>
-            <div
-              class="post-image"
-              style="background-image: url('${item.thumbnail || 'https://via.placeholder.com/600'}')"
-            ></div>
-            <div class="post-actions">
-              <div class="left-icons">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-comment"></i>
-                <i class="fa-regular fa-paper-plane"></i>
-              </div>
-              <div class="right-icons">
-                <i class="fa-regular fa-bookmark"></i>
-              </div>
-            </div>
-            <div class="post-caption">
-              <span class="username">${item.username || item.title}</span>
-              <span>${item.description || ''} 
-                <a href="${item.url}" style="color: #00376b;" target="_blank" rel="noopener">
-                  ${item.url}
-                </a>
-              </span>
-            </div>
-            <div class="divider"></div>
-          `;
-          container.appendChild(post);
-        });
-      }
-      window.addEventListener('DOMContentLoaded', renderLinksAsPosts);
-    </script>
-    -->
-
-    <!-- Extra space at bottom so last post isn’t flush against the viewport -->
-    <div class="footer-spacer"></div>
+    <!-- ── Example Item 6 ─────────────────────────────────────────────── -->
+    <div class="grid-item">
+      <a href="https://example.com/link6" target="_blank" rel="noopener">
+        <img src="https://via.placeholder.com/600" alt="Link 6" />
+      </a>
+    </div>
   </div>
+
+  <div class="grid-caption">
+    Tap any square to visit the link
+  </div>
+
 </body>
 </html>
