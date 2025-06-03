@@ -6,115 +6,146 @@
     name="viewport"
     content="width=device-width, initial-scale=1"
   />
-  <title>My Links</title>
+  <title>My Links — Boone &amp; Crockett Style</title>
 
   <!-- ===================================================================
-       CSS to approximate Boone & Crockett’s tag page typography, spacing,
-       and card‐style look (see: turn0search0, turn1search0)
+       Fonts & Colors (matching B&C site)
        ==================================================================== -->
   <style>
-    /* 1. Reset & base */
-    * {
+    /* ─── 1. Color Palette ─────────────────────────────────────────────── */
+    :root {
+      --color-dark-green: #004d38;     /* header/nav accent */
+      --color-medium-green: #00664d;   /* button hover accent */
+      --color-light-gray: #f5f5f5;     /* page background */
+      --color-card-bg: #ffffff;        /* card background */
+      --color-border: #e0e0e0;         /* card border */
+      --color-text: #333333;           /* primary text */
+      --color-muted: #555555;          /* secondary text */
+    }
+
+    /* ─── 2. Base Reset & Typography ──────────────────────────────────── */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    html {
+      font-size: 100%; /* 16px baseline */
+    }
     body {
       font-family: "Helvetica Neue", Arial, sans-serif;
-      background-color: #fdfdfd;
-      color: #333;
-      line-height: 1.5;
+      background-color: var(--color-light-gray);
+      color: var(--color-text);
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--color-dark-green);
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 2rem; /* 32px */
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.25rem; /* 20px */
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1rem; /* 16px */
+      color: var(--color-muted);
+      margin-bottom: 1rem;
+    }
     a {
-      color: #00563d; /* dark green accent */
+      color: var(--color-dark-green);
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
     }
 
-    /* 2. Wrapper & container */
+    /* ─── 3. Page Wrapper & Layout ───────────────────────────────────── */
     .wrapper {
-      max-width: 800px;
+      max-width: 800px;  /* matches B&C content column */
       margin: 0 auto;
       padding: 2rem 1rem;
     }
-
-    /* 3. Page header */
     header.page-header {
-      margin-bottom: 2rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
     header.page-header h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 2rem;
-      color: #002e20; /* very dark green/black */
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
     header.page-header p {
       font-size: 1rem;
-      color: #555;
+      color: var(--color-muted);
     }
 
-    /* 4. Link list (cards) */
+    /* ─── 4. Link Cards (mimic B&C post cards) ────────────────────────── */
     ul.link-list {
       list-style: none;
+      margin-top: 1.5rem;
     }
     ul.link-list li {
-      background-color: #fff;
-      border: 1px solid #e0e0e0;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
       border-radius: 4px;
       margin-bottom: 1.5rem;
       overflow: hidden;
-      transition: box-shadow 0.2s ease;
+      transition: box-shadow 0.2s ease-in-out;
     }
     ul.link-list li:hover {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     }
 
-    /* 5. Card content */
+    /* ─── 5. Card Content ──────────────────────────────────────────────── */
     .link-card {
       display: flex;
       flex-direction: column;
-      padding: 1rem 1rem;
+      padding: 1rem 1.5rem;
     }
     .link-card h2 {
-      font-family: Georgia, serif;
-      font-size: 1.25rem;
-      color: #002e20;
       margin-bottom: 0.5rem;
     }
     .link-card p {
-      font-size: 0.95rem;
-      color: #555;
       margin-bottom: 0.75rem;
     }
     .link-card a.button {
       align-self: flex-start;
-      background-color: #00563d;
-      color: #fff;
+      background-color: var(--color-dark-green);
+      color: #ffffff;
       padding: 0.5rem 1rem;
       font-size: 0.95rem;
       border-radius: 3px;
       transition: background-color 0.2s ease;
     }
     .link-card a.button:hover {
-      background-color: #004a33;
+      background-color: var(--color-medium-green);
+    }
+
+    /* ─── 6. Footer ───────────────────────────────────────────────────── */
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.875rem; /* 14px */
+      color: var(--color-muted);
     }
   </style>
 </head>
 <body>
+
+  <!-- ─── 7. Page Content ──────────────────────────────────────────────── -->
   <div class="wrapper">
-    <!-- 1. Page header (mimics “B&C Instagram Posts” heading style) -->
+    <!-- Page Header -->
     <header class="page-header">
       <h1>My Links</h1>
       <p>A curated list of my favorite resources</p>
     </header>
 
-    <!-- 2. Replace this UL with n8n‐driven JSON → JS template logic -->
+    <!-- Link List (hardcoded for demonstration; see JS below for JSON‐driven) -->
     <ul class="link-list">
-      <!-- Example card #1 -->
       <li>
         <div class="link-card">
           <h2>Website</h2>
@@ -129,7 +160,6 @@
         </div>
       </li>
 
-      <!-- Example card #2 -->
       <li>
         <div class="link-card">
           <h2>Newsletter</h2>
@@ -144,7 +174,6 @@
         </div>
       </li>
 
-      <!-- Example card #3 -->
       <li>
         <div class="link-card">
           <h2>Blog</h2>
@@ -159,35 +188,44 @@
         </div>
       </li>
 
-      <!-- …n8n can loop through /links.json and inject similar <li>… cards …</li>… -->
+      <!-- …n8n can loop through /links.json and inject similar <li> cards here… -->
     </ul>
-  </div>
 
-  <!-- 3. If you want to drive this from /links.json, you could swap out
-        the hard‐coded <li> elements above with JS like:
-
+    <!-- JS to drive cards from /links.json (uncomment if you wish) -->
+    <!--
     <script>
       async function renderLinks() {
-        const res = await fetch("/links.json");
-        const data = await res.json();
-        const list = document.querySelector(".link-list");
-        data.forEach(item => {
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <div class="link-card">
-              <h2>${item.title}</h2>
-              <p>${item.description || ""}</p>
-              <a href="${item.url}" class="button" target="_blank" rel="noopener">
-                Visit
-              </a>
-            </div>
-          `;
-          list.appendChild(li);
-        });
+        try {
+          const res = await fetch('/links.json');
+          if (!res.ok) throw new Error('Failed to fetch links.json');
+          const data = await res.json();
+          const list = document.querySelector('.link-list');
+          list.innerHTML = ''; // clear hardcoded examples
+          data.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <div class="link-card">
+                <h2>${item.title}</h2>
+                <p>${item.description || ''}</p>
+                <a href="${item.url}" class="button" target="_blank" rel="noopener">
+                  ${item.buttonText || 'Visit'}
+                </a>
+              </div>
+            `;
+            list.appendChild(li);
+          });
+        } catch (err) {
+          console.error(err);
+        }
       }
-      window.addEventListener("DOMContentLoaded", renderLinks);
+      window.addEventListener('DOMContentLoaded', renderLinks);
     </script>
-  -->
+    -->
+  </div>
 
+  <!-- Footer Attribution (optional) -->
+  <footer>
+    &copy; 2025 My Name — In Boone &amp; Crockett Style
+  </footer>
 </body>
 </html>
