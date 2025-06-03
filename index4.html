@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>Instagram‐Style Grid Links</title>
+  <style>
+    /* ─── 1. Basic Reset & Body ───────────────────────────────────────── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #fafafa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      color: #262626;
+      line-height: 1.4;
+      padding: 1rem;
+    }
+
+    /* ─── 2. Grid Container ───────────────────────────────────────────── */
+    .grid-container {
+      display: grid;
+      /* 3 columns on desktop, thin gutters like Instagram */
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+    }
+
+    /* ─── 3. Each Grid Item ───────────────────────────────────────────── */
+    .grid-item {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* 1:1 aspect ratio */
+      overflow: hidden;
+      background-color: #efefef; /* placeholder background */
+    }
+    .grid-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ─── 4. Clickable Overlay ────────────────────────────────────────── */
+    .grid-item a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-decoration: none;
+    }
+
+    /* ─── 5. Caption Under Grid ───────────────────────────────────────── */
+    .grid-caption {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    /* ─── 6. Responsive Breakpoints ────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 400px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1) The empty grid‐container: populated by JS below -->
+  <div class="grid-container" id="grid"></div>
+
+  <div class="grid-caption">
+    Tap any square to visit the link
+  </div>
+
+  <script>
+    async function populateGrid() {
+      try {
+        // 2) Fetch using a relative path (no leading slash)
+        const res = await fetch('links.json');
+        if (!res.ok) throw new Error('Failed to load links.json: ' + res.status);
+
+        // 3) Parse to JavaScript value
+        const data = await res.json();
+
+        // 4) Verify it’s an array
+        if (!Array.isArray(data)) {
+          console.error('Expected links.json to be an array but got:', data);
+          throw new Error('links.json is not a top‐level array.');
+        }
+
+        // 5) Grab the grid container and clear any existing items
+        const grid = document.getElementById('grid');
+        grid.innerHTML = '';
+
+        // 6) Loop over each item in the array and build a <div class="grid-item">
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'grid-item';
+
+          // 6a) Create the <img> (fills the 1:1 square)
+          const img = document.createElement('img');
+          img.src = item.thumbnail;
+          img.alt = item.alt || '';
+
+          // 6b) Wrap <img> in an <a> so clicking goes to the URL
+          const link = document.createElement('a');
+          link.href = item.url;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.appendChild(img);
+
+          // 6c) Append <a> to <div class="grid-item">, then to the grid
+          div.appendChild(link);
+          grid.appendChild(div);
+        });
+      } catch (err) {
+        console.error(err);
+        // 7) On error, show a friendly message
+        document.getElementById('grid').innerHTML =
+          '<p style="padding:1rem; text-align:center; color:#888;">Unable to load links.</p>';
+      }
+    }
+
+    // 8) Run on page load
+    window.addEventListener('DOMContentLoaded', populateGrid);
+  </script>
+</body>
+</html>
