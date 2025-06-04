@@ -1,1 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram-Style Link Grid</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fafafa;
+      color: #262626;
+      line-height: 1.4;
+    }
+
+    .container {
+      max-width: 975px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background-color: white;
+      border-bottom: 2px solid #333;
+      padding: 15px 0;
+      margin-bottom: 25px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: center; /* Center the header content */
+      align-items: center; /* Vertically center items */
+      max-width: 975px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #262626;
+    }
+
+    .nav-links a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: #262626;
+      font-size: 14px;
+    }
+
+    /* Header styles */
+    /* DDC Hardware font */
+    @font-face {
+      font-family: 'DDC Hardware';
+      src: url('fonts/ddc-hardware/DDCHardware-Regular.woff2') format('woff2');
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400;
+      font-stretch: normal;
+    }
+    
+    /* Import a complementary sans-serif font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: 100%;
+      transition: transform 0.2s ease;
+    }
+    
+    .logo-container:hover {
+      transform: scale(1.01);
+    }
+    
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center align the text */
+      margin-left: 20px;
+      width: 100%;
+    }
+    
+    .subhead {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #555;
+      margin: 5px 0 0 0;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      margin-right: 20px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .club-name {
+      font-family: 'DDC Hardware', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* Grid styles */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin: 0 auto;
+    }
+
+    .grid-item {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      overflow: hidden;
+      background: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .grid-item a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .grid-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .image-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 12px;
+      font-size: 14px;
+      text-align: center;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .grid-item:hover .image-caption {
+      transform: translateY(0);
+    }
+
+    .grid-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .image-caption a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      display: inline-block;
+      padding: 2px 0;
+    }
+
+    .image-caption a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+
+    .image-caption a:hover::after {
+      width: 100%;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      #grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      
+      header {
+        padding: 15px 0;
+      }
+      
+      .container {
+        padding: 0 12px;
+      }
+      
+      .club-name {
+        font-size: 2rem;
+      }
+      
+      .subhead {
+        font-size: 1rem;
+      }
+      
+      .nav-links a {
+        margin-left: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      
+      .grid-item {
+        max-width: 100%;
+      }
+      
+      .nav-links a {
+        margin-left: 12px;
+        font-size: 13px;
+      }
+    }
+  </style>
+
+  <!-- 
+    Load the script only after the entire HTML has been parsed.
+    You can also move this <script> down into <body> right before </body> 
+    if you prefer not to use `defer`.
+  -->
+  <script>
+    // Sample data - in a real app, this would come from links.json
+    const sampleData = [
+      {
+        url: 'https://source.unsplash.com/random/600x600/?nature',
+        thumbnail: 'https://source.unsplash.com/random/600x600/?nature',
+        alt: 'Beautiful nature landscape',
+        title: 'Nature Photography'
+      },
+      {
+        url: 'https://source.unsplash.com/random/600x600/?city',
+        thumbnail: 'https://source.unsplash.com/random/600x600/?city',
+        alt: 'Urban city view',
+        title: 'City Life'
+      },
+      {
+        url: 'https://source.unsplash.com/random/600x600/?food',
+        thumbnail: 'https://source.unsplash.com/random/600x600/?food',
+        alt: 'Delicious food',
+        title: 'Food & Dining'
+      },
+      {
+        url: 'https://source.unsplash.com/random/600x600/?travel',
+        thumbnail: 'https://source.unsplash.com/random/600x600/?travel',
+        alt: 'Travel adventure',
+        title: 'Travel Adventures'
+      },
+      {
+        url: 'https://source.unsplash.com/random/600x600/?animals',
+        thumbnail: 'https://source.unsplash.com/random/600x600/?animals',
+        alt: 'Cute animals',
+        title: 'Animal Friends'
+      },
+      {
+        url: 'https://source.unsplash.com/random/600x600/?fashion',
+        thumbnail: 'https://source.unsplash.com/random/600x600/?fashion',
+        alt: 'Fashion style',
+        title: 'Fashion Trends'
+      }
+    ];
+
+    async function populateGrid() {
+      const grid = document.getElementById('grid');
+      
+      try {
+        // Try to load from links.json
+        const response = await fetch('links.json');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Validate data structure
+        if (!Array.isArray(data)) {
+          throw new Error('Expected an array in links.json');
+        }
+        
+        // Clear any existing content
+        grid.innerHTML = '';
+        
+        if (data.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+              No content available. Please add items to links.json
+            </div>`;
+          return;
+        }
+        
+        // Build the grid
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'grid-item';
+          
+          // Create the main link
+          const link = document.createElement('a');
+          link.href = item.url || '#';
+          link.target = item.url ? '_blank' : '';
+          link.rel = 'noopener noreferrer';
+          
+          // Image container
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'image-container';
+          
+          // Image element
+          const img = document.createElement('img');
+          img.src = item.thumbnail || '';
+          img.alt = item.alt || '';
+          img.loading = 'lazy';
+          
+          // Handle image loading errors
+          img.onerror = function() {
+            this.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%22100%22%20y%3D%22100%22%20font-family%3D"sans-serif"%20font-size%3D"14"%20text-anchor%3D"middle"%20alignment-baseline%3D"middle"%20fill%3D"%23999"%3EImage%20not%20found%3C%2Ftext%3E%3C%2Fsvg%3E';
+          };
+          
+          // Caption with title
+          const caption = document.createElement('div');
+          caption.className = 'image-caption';
+          
+          const titleLink = document.createElement('a');
+          titleLink.href = item.url || '#';
+          titleLink.target = item.url ? '_blank' : '';
+          titleLink.rel = 'noopener noreferrer';
+          titleLink.textContent = item.title || item.alt || 'View';
+          
+          // Make the entire grid item clickable
+          div.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'A') {
+              window.open(item.url || '#', item.url ? '_blank' : '_self');
+            }
+          });
+
+          // Assemble the elements
+          caption.appendChild(titleLink);
+          imgContainer.appendChild(img);
+          link.appendChild(imgContainer);
+          link.appendChild(caption);
+          div.appendChild(link);
+          grid.appendChild(div);
+        });
+        
+      } catch (error) {
+        console.error('Error loading content:', error);
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+            Error loading content. Please check the console for details.
+          </div>`;
+      }
+    }
+
+    // Run when DOM is ready
+    document.addEventListener('DOMContentLoaded', populateGrid);
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <a href="https://www.boone-crockett.org" class="logo-container">
+        <img src="images/BCC_Logo_blk.png" alt="Boone and Crockett Club Logo" class="logo-img">
+        <div class="logo-text">
+          <h1 class="club-name">BOONE AND CROCKETT CLUB</h1>
+          <div class="subhead">Links to Our Content</div>
+        </div>
+      </a>
+      <!-- Navigation menu removed -->
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Grid container -->
+    <div id="grid">
+      <!-- Grid items will be inserted here by JavaScript -->
+      <div class="empty-message">Loading content...</div>
+    </div>
+  </main>
+</body>
+</html>
 
