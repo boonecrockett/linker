@@ -221,46 +221,83 @@
     }
 
     /* Responsive adjustments */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       #grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 16px;
       }
       
       header {
-        padding: 15px 0;
+        padding: 12px 0;
       }
       
       .container {
         padding: 0 12px;
       }
       
+      .logo-container {
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .logo-img {
+        height: 80px;
+        margin-right: 15px;
+      }
+      
       .club-name {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        white-space: nowrap;
       }
       
       .subhead {
-        font-size: 1rem;
-      }
-      
-      .nav-links a {
-        margin-left: 16px;
+        font-size: 0.9rem;
+        white-space: nowrap;
       }
     }
-
+    
+    @media (max-width: 768px) {
+      #grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      
+      .logo-img {
+        height: 60px;
+        margin-right: 10px;
+      }
+      
+      .club-name {
+        font-size: 1.5rem;
+      }
+      
+      .subhead {
+        font-size: 0.8rem;
+      }
+    }
+    
     @media (max-width: 480px) {
       #grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
       }
       
       .grid-item {
         max-width: 100%;
       }
       
-      .nav-links a {
-        margin-left: 12px;
-        font-size: 13px;
+      .logo-img {
+        height: 50px;
+        margin-right: 8px;
+      }
+      
+      .club-name {
+        font-size: 1.2rem;
+        letter-spacing: 0.01em;
+      }
+      
+      .subhead {
+        font-size: 0.7rem;
       }
     }
   </style>
