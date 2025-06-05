@@ -1,5 +1,10 @@
 [
   {
+    "url": "https://www.boone-crockett.org/records-watch",
+    "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/recordswatch2-logo.jpg",
+    "alt": "Records Watch"
+  },
+  {
     "url": "http://www.boone-crockett.org/node/453351",
     "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/recordbook_royalty_fb.jpg",
     "alt": "Record-book Royalty"
