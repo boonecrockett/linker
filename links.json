@@ -1,5 +1,10 @@
 [
   {
+    "url": "https://www.boone-crockett.org/records-watch",
+    "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/recordswatch2-logo.jpg",
+    "alt": "Records Watch"
+  },
+  {
     "url": "https://www.boone-crockett.org/boone-and-crockett-clubs-heritage-hunt-podcast",
     "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/hh_podcast_youtube.png",
     "alt": "Boone and Crockett Club's Heritage of the Hunt Podcast"
