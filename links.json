@@ -1,5 +1,10 @@
 [
   {
+    "url": "https://www.boone-crockett.org/records-watch",
+    "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/recordswatch2-logo.jpg",
+    "alt": "Records Watch"
+  },
+  {
     "url": "https://www.boone-crockett.org/32nd-big-game-awards-auction",
     "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/32_bga_auction_headers_1200x628.png",
     "alt": "Auction is Live!"
