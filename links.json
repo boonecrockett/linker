@@ -1,5 +1,10 @@
 [
   {
+    "url": "https://www.boone-crockett.org/records-watch",
+    "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/recordswatch2-logo.jpg",
+    "alt": "Records Watch"
+  },
+  {
     "url": "http://www.boone-crockett.org/node/435226",
     "thumbnail": "https://aws.boone-crockett.org/s3fs-public/thumbnails/image/nunavut_canada-staterecords-fb.jpg",
     "alt": "Nunavut Provincial Big Game Records"
